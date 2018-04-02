@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1522646515 source:c:\users\ediberto\documents\sistemas embarcados\trabalho\semb\main.c
+	<stdio.h>
+	<stdlib.h>
+
