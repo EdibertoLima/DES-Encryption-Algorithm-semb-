@@ -1,11 +1,15 @@
-    #include <stdio.h>
+#include <stdio.h>
     #include <stdlib.h>
-    int main(void) {
-    unsigned long long pln_txt, key, k[16], cd = 0, temp = 0, des_out = 0, ep_out48 = 0;
-    unsigned int l = 0, r = 0, c0 = 0, d0 = 0, sb_out32 = 0, p_out32 = 0, ch = 0;
+
+    unsigned long long txt1[2] ={0x4E6F772069732074,0x4E6F772069732074};
+    unsigned long long pln_txt, key;
+    unsigned int ch;
+    crip (long long pln_txt,long long key, int ch){
+    unsigned long long k[16], cd = 0, temp = 0, des_out = 0, ep_out48 = 0;
+    unsigned int l = 0, r = 0, c0 = 0, d0 = 0, sb_out32 = 0, p_out32 = 0;
     unsigned char sdata = 0, row = 0, col = 0;
     int j = 0, i = 0, round = 0;
-    static unsigned char pc1[56] = { 57, 49, 41, 33, 25, 17, 9, //PC1
+      static unsigned char pc1[56] = { 57, 49, 41, 33, 25, 17, 9, //PC1
                                     1, 58, 50, 42, 34, 26, 18,
                                     10, 2, 59, 51, 43, 35, 27,
                                     19, 11, 3, 60, 52, 44, 36,
@@ -86,16 +90,7 @@
                                     35, 3, 43, 11, 51, 19, 59, 27,
                                     34, 2, 42, 10, 50, 18, 58, 26,
                                     33, 1, 41, 9, 49, 17, 57, 25};
-    printf("Please select from menu:\n");
-    printf("1. Cipher\n");
-    printf("2. Decipher\n");
-    printf("Choice: ");
-    scanf("%d",&ch);
-    printf("Enter 64bit text in Hex : ");
-    scanf("%llx",&pln_txt);
-    printf("Enter 64bit Key in Hex : ");
-    scanf("%llx",&key);
-    ////////////////////////Key Schedule////////////////////////////////////
+     ////////////////////////Key Schedule////////////////////////////////////
     for (j=27; j>=0;j--) //PC1
     {
         c0 = c0 ^ (((key >> (64-pc1[(27-j)])) & 0x1) << j);
@@ -161,6 +156,31 @@
         des_out = 0;
     for (j=63; j>=0;j--)
         des_out = des_out ^ (((temp >> (64-iip[(63-j)])) & 0x1) << j);
-        printf("des_out = %llx \n", des_out); //result
+        printf("%llx", des_out); //result
         return 0;
+
+
+
+
+
+    }
+
+    int main(void) {
+
+    printf("Selecione uma opcicao do menu:\n");
+    printf("1. criptografar\n");
+    printf("2. descriptografar\n");
+    printf("opcao: ");
+    scanf("%d",&ch);
+   // printf("Digite texto 64bit em Hex : ");
+    //scanf("%llx",&pln_txt);
+    //printf("Digite Chave 64bit em Hex : \n");
+   // scanf("%llx",&key);
+    key=0x0123456789ABCDEF;
+    printf("des_out =   ");
+    for(int i=0 ; i<2; i++ ){
+     //printf("txt1 = %llx \n", txt1[i]);
+
+        crip(txt1[i],key,1);
+    }
     }
