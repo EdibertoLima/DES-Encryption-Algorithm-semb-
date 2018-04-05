@@ -156,7 +156,7 @@
         des_out = 0;
     for (j=63; j>=0;j--)
         des_out = des_out ^ (((temp >> (64-iip[(63-j)])) & 0x1) << j);
-        printf("%llx", des_out); //result
+        printf("%016llX", des_out); //result
         return 0;
 
 
